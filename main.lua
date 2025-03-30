@@ -55,6 +55,7 @@ end
 
 function WorkBlock()
   local result, table = turtle.inspectDown()
+  print(table.name)
   if table.name == "minecraft:grass_block" or table.name == "minecraft:dirt" then
     turtle.digDown()
   end
@@ -103,6 +104,7 @@ function Main()
     end
     if loc.z == 2 or loc.z == 4 then
       while loc.x > 1 do
+        WorkBlock()
         TurnTo(2)
         loc.cd = 2
         turtle.forward()
