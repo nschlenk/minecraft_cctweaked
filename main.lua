@@ -21,16 +21,16 @@ loc = {
 function Hoe()
   info = turtle.getItemDetail()
   n = 0
-  while info ~= nil and n < 16 do
+  while n < 16 do
     info = turtle.getItemDetail()
     if info.name == "minecraft:iron_hoe" then
       return true
-    elseif info.name ~= "minecraft:iron_hoe" then
+    else
       n = n + 1
       x = turtle.getSelectedSlot()
       if x == 16 then
         new_x = 1
-      elseif x ~= 16 then
+      else
         new_x = x + 1
       end
     end
@@ -56,4 +56,6 @@ function Main()
   --end
 end
 
+
+turtle.select(1)
 Main()
