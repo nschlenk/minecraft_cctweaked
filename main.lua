@@ -8,7 +8,7 @@
 function Main()
   turtle.forward()
   turtle.turnLeft()
-  turtle.foward()
+  turtle.forward()
   print("oopsie")
 end
 
