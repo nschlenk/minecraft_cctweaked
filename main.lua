@@ -21,7 +21,7 @@ loc = {
 function Hoe()
   info = turtle.getItemDetail()
   n = 0
-  while n < 16 do
+  while info ~= nil and n < 16 do
     info = turtle.getItemDetail()
     if info.name == "minecraft:iron_hoe" then
       return true
@@ -39,12 +39,18 @@ function Hoe()
   return false
 end
 
+function GetHoe()
+  print("Getting hoe")
+end
+
 
 function Main()
   local result, table = turtle.inspectDown()
   hoe_present = Hoe()
   if hoe_present == true then
     print(table.name)
+  elseif hoe_present == false then
+    GetHoe()
   end
   --if table.name == "minecraft:dirt" or table.name == "minecraft:grass_block" then
   --end
