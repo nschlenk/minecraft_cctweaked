@@ -19,9 +19,9 @@ loc = {
 }
 
 function Main()
-  local table = turtle.inspectDown()
-  for val in table do
-    print(val)
+  local result, table = turtle.inspectDown()
+  if result then
+    print("Name: ", table.name)
   end
 end
 
