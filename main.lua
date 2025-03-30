@@ -54,7 +54,16 @@ function TurnTo(direction) -- east (0), west (2), north (1), south (3)
 end
 
 function GoHome()
-  print("Going home")
+  while loc.z > 1 do
+    TurnTo(3)
+    turtle.forward()
+    loc.z = loc.z - 1
+  end
+  while loc.x > 1 do
+    TurnTo(2)
+    turtle.forward()
+    loc.x = loc.x - 1
+  end
 end
 
 function Main()
