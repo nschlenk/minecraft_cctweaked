@@ -16,9 +16,9 @@ local loc = {
   z = 1,
 }
 
-function Hoe()
+function HoeHand()
   local n = 0
-  while n < 16 do
+  while n < 17 do
     local info = turtle.getItemDetail()
     x = turtle.getSelectedSlot()
     if info ~= nil and info.name == "minecraft:diamond_hoe" then
@@ -31,6 +31,8 @@ function Hoe()
       turtle.select(x + 1)
     end
     n = n + 1
+    if n == 16 then
+      turtle.equipLeft(x)
   end
   return false
 end
@@ -87,7 +89,7 @@ function GoHome()
 end
 
 function Main()
-  local hoe_present = Hoe() -- equips hoe and returns true if there is a diamond hoe in the inventory
+  local hoe_in_hand = HoeHand() -- equips hoe and returns true if there is a diamond hoe in the inventory
   while hoe_present do
     hoe_present = Hoe()
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
