@@ -53,26 +53,43 @@ function TurnTo(direction) -- east (0), west (2), north (1), south (3)
   end
 end
 
-function GoHome()
-  while loc.z > 1 do
-    TurnTo(3)
-    turtle.forward()
-    loc.z = loc.z - 1
-  end
-  while loc.x > 1 do
-    TurnTo(2)
-    turtle.forward()
-    loc.x = loc.x - 1
+function WorkBlock()
+  local result, table = turtle.inspectDown()
+  if table.name == "minecraft:grass_block" or table.name == "minecraft:dirt" then
+    -- hoe
   end
 end
 
+
+function GoHome()
+  local start_loc = {
+    cd = loc.cd,
+    x = loc.x,
+    z = loc.z,
+  }
+  while start_loc.z > 1 do
+    TurnTo(3)
+    turtle.forward()
+    start_loc.z = start_loc.z - 1
+  end
+  while start_loc.x > 1 do
+    TurnTo(2)
+    turtle.forward()
+    start_loc.x = start_loc.x - 1
+  end
+  TurnTo(2)
+  loc.cd = 2
+  loc.x = 1
+  loc.z = 1
+end
+
 function Main()
-  local result, table = turtle.inspectDown()
   local hoe_present = Hoe()
   while hoe_present do
     hoe_present = Hoe()
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
       while loc.x < 5 do
+        WorkBlock()
         TurnTo(0)
         loc.cd = 0
         turtle.forward()
