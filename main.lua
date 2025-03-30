@@ -1,5 +1,5 @@
 -- Noelle is trying her best
--- ~= means not equal unless it's boolean, then it's "not"
+-- ~= means not equal
 -- boolean values are all lowercase
 -- variables are global by default
 -- nil instead of null
@@ -87,15 +87,15 @@ function GoHome()
 end
 
 function Main()
-  local hoe_present = Hoe()
+  local hoe_present = Hoe() -- equips hoe and returns true if there is a diamond hoe in the inventory
   while hoe_present do
     hoe_present = Hoe()
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
       while loc.x < 5 do
-        WorkBlock()
         TurnTo(0)
         loc.cd = 0
         turtle.forward()
+        WorkBlock()
         loc.x = loc.x + 1
       end
       if loc.z == 1 or loc.z == 3 then
@@ -107,10 +107,10 @@ function Main()
     end
     if loc.z == 2 or loc.z == 4 then
       while loc.x > 1 do
-        WorkBlock()
         TurnTo(2)
         loc.cd = 2
         turtle.forward()
+        WorkBlock()
         loc.x = loc.x - 1
       end
       TurnTo(1)
