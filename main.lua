@@ -4,29 +4,26 @@
 -- variables are global by default
 -- nil instead of null
 
-origin = {
-  cd = 'e',
+local origin = {
+  cd = 0, -- east (0), west (2), north (-1), south (-1)
   x = 1,
-  y = 1,
   z = 1,
 }
 
-loc = {
-  cd = 'e',
+local loc = {
+  cd = 0,
   x = 1,
-  y = 1,
   z = 1,
 }
 
 function Hoe()
-  n = 0
+  local n = 0
   while n < 16 do
-    info = turtle.getItemDetail()
+    local info = turtle.getItemDetail()
     x = turtle.getSelectedSlot()
     if info ~= nil and info.name == "minecraft:iron_hoe" then
       return true
     end
-
     if x == 16 then
       turtle.select(1)
     else
@@ -38,18 +35,31 @@ function Hoe()
 end
 
 function GetHoe()
-  print("Getting hoe")
+  print("Hoe please")
+  --Turtle will go get a hoe
+end
+
+
+function TurnTo(direction) -- east (0), west (2), north (-1), south (-1)
+  local diff = direction - loc.cd
+  if diff < 0 then
+    diff = -1 * diff
+  end
+  local n = diff
+  while n > 0 do
+    turtle.turnRight()
+    n = n - 1
+  end
 end
 
 
 function Main()
   local result, table = turtle.inspectDown()
-  hoe_present = Hoe()
-  if hoe_present == true then
-    print(table.name)
-  elseif hoe_present == false then
+  local hoe_present = Hoe()
+  if hoe_present ~= true then
     GetHoe()
   end
+  TurnTo(2)
   --if table.name == "minecraft:dirt" or table.name == "minecraft:grass_block" then
   --end
 end
