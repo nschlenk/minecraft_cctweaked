@@ -92,7 +92,7 @@ end
 function Main()
   local hoe_in_hand = HoeHand() -- equips hoe and returns true if there is a diamond hoe in the inventory
   while hoe_in_hand do
-    hoe_in_hand = Hoe()
+    hoe_in_hand = HoeHand()
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
       while loc.x < 5 do
         TurnTo(0)
