@@ -57,7 +57,9 @@ function WorkBlock()
   local result, table = turtle.inspectDown()
   print(table.name)
   if table.name == "minecraft:grass_block" or table.name == "minecraft:dirt" then
+    turtle.up()
     turtle.digDown()
+    turtle.down()
   end
 end
 
