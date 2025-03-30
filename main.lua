@@ -23,6 +23,11 @@ function Main()
   if result then
     print("Name: ", table.name)
   end
+  turtle.select(2)
+  equipped = turtle.getItemDetail()
+  if equipped ~= nil then
+    print("Currently holding: ", equipped.name)
+  end
 end
 
 Main()
