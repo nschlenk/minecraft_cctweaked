@@ -62,20 +62,19 @@ end
 
 
 function GoHome()
-  local start_loc = {
-    cd = loc.cd,
-    x = loc.x,
-    z = loc.z,
-  }
-  while start_loc.z > 1 do
+  local move_z = loc.z
+  local move_x = loc.x
+  while move_z > 1 do
     TurnTo(3)
+    loc.cd = 3
     turtle.forward()
-    start_loc.z = start_loc.z - 1
+    move_z = move_z - 1
   end
-  while start_loc.x > 1 do
+  while move_x > 1 do
     TurnTo(2)
+    loc.cd = 2
     turtle.forward()
-    start_loc.x = start_loc.x - 1
+    move_x = move_x - 1
   end
   TurnTo(2)
   loc.cd = 2
