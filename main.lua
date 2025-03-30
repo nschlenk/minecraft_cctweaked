@@ -21,7 +21,7 @@ function Hoe()
   while n < 16 do
     local info = turtle.getItemDetail()
     x = turtle.getSelectedSlot()
-    if info ~= nil and info.name == "minecraft:iron_hoe" then
+    if info ~= nil and info.name == "minecraft:diamond_hoe" then
       turtle.equipLeft(x)
       return true
     end
