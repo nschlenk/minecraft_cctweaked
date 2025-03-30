@@ -41,14 +41,15 @@ end
 
 
 function TurnTo(direction) -- east (0), west (2), north (1), south (3)
-  local diff = direction - loc.cd
-  if diff < 0 then
-    diff = -1 * diff
-  end
+  local diff = loc.cd - direction
   local n = diff
   while n > 0 do
-    turtle.turnLeft()
+    turtle.turnRight()
     n = n - 1
+  end
+  while n < 0 do
+    turtle.turnLeft()
+    n = n + 1
   end
 end
 
@@ -76,7 +77,7 @@ function Main()
       end
     end
     if loc.z == 2 or loc.z == 4 then
-      while loc.x > 0 do
+      while loc.x > 1 do
         TurnTo(2)
         loc.cd = 2
         turtle.forward()
