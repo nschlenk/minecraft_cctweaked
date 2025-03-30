@@ -19,7 +19,8 @@ loc = {
 }
 
 function Main()
-  turtle.inspectDown()
+  table = turtle.inspectDown()
+  print(table)
 end
 
 Main()
