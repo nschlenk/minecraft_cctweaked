@@ -18,16 +18,36 @@ loc = {
   z = 1,
 }
 
+function Hoe()
+  info = turtle.getItemDetail()
+  n = 0
+  while n < 16 do
+    info = turtle.getItemDetail()
+    if info.name == "minecraft:iron_hoe" then
+      return true
+    elseif info.name ~= "minecraft:iron_hoe" then
+      n = n + 1
+      x = turtle.getSelectedSlot()
+      if x == 16 then
+        new_x = 1
+      elseif x ~= 16 then
+        new_x = x + 1
+      end
+    end
+    turtle.select(new_x)
+  end
+  return false
+end
+
+
 function Main()
   local result, table = turtle.inspectDown()
-  if result then
-    print("Name: ", table.name)
+  hoe_present = Hoe()
+  if hoe_present == true then
+    print(table.name)
   end
-  turtle.select(2)
-  equipped = turtle.getItemDetail()
-  if equipped ~= nil then
-    print("Currently holding: ", equipped.name)
-  end
+  --if table.name == "minecraft:dirt" or table.name == "minecraft:grass_block" then
+  --end
 end
 
 Main()
