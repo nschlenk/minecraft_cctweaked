@@ -33,6 +33,7 @@ function HoeHand()
     n = n + 1
     if n == 16 then
       turtle.equipLeft(x)
+    end
   end
   return false
 end
