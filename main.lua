@@ -62,7 +62,7 @@ function Main()
   while hoe_present do
     hoe_present = Hoe()
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
-      while loc.x < 6 do
+      while loc.x < 5 do
         TurnTo(0)
         loc.cd = 0
         turtle.forward()
@@ -77,8 +77,8 @@ function Main()
     end
     if loc.z == 2 or loc.z == 4 then
       while loc.x > 0 do
-        TurnTo(1)
-        loc.cd = 1
+        TurnTo(2)
+        loc.cd = 2
         turtle.forward()
         loc.x = loc.x - 1
       end
