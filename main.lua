@@ -4,12 +4,22 @@
 -- variables are global by default
 -- nil instead of null
 
+origin = {
+  cd = 'e',
+  x = 1,
+  y = 1,
+  z = 1,
+}
+
+loc = {
+  cd = 'e',
+  x = 1,
+  y = 1,
+  z = 1,
+}
 
 function Main()
-  turtle.forward()
-  turtle.turnLeft()
-  turtle.forward()
-  print("oopsie")
+  turtle.inspectDown()
 end
 
 Main()
