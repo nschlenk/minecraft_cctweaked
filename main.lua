@@ -5,7 +5,7 @@
 -- nil instead of null
 
 local origin = {
-  cd = 0, -- east (0), west (2), north (-1), south (-1)
+  cd = 0, -- east (0), west (2), north (1), south (3)
   x = 1,
   z = 1,
 }
@@ -40,14 +40,14 @@ function GetHoe()
 end
 
 
-function TurnTo(direction) -- east (0), west (2), north (-1), south (-1)
+function TurnTo(direction) -- east (0), west (2), north (1), south (3)
   local diff = direction - loc.cd
   if diff < 0 then
     diff = -1 * diff
   end
   local n = diff
   while n > 0 do
-    turtle.turnRight()
+    turtle.turnLeft()
     n = n - 1
   end
 end
@@ -69,8 +69,8 @@ function Main()
         loc.x = loc.x + 1
       end
       if loc.z == 1 or loc.z == 3 then
-        TurnTo(-1)
-        loc.cd = -1
+        TurnTo(1)
+        loc.cd = 1
         turtle.forward()
         loc.z = loc.z + 1
       end
@@ -82,8 +82,8 @@ function Main()
         turtle.forward()
         loc.x = loc.x - 1
       end
-      TurnTo(-1)
-      loc.cd = -1
+      TurnTo(1)
+      loc.cd = 1
       turtle.forward()
       loc.z = loc.z + 1
     end
