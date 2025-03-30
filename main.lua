@@ -19,8 +19,10 @@ loc = {
 }
 
 function Main()
-  table = turtle.inspectDown()
-  print(table)
+  local table = turtle.inspectDown()
+  for val in table do
+    print(val)
+  end
 end
 
 Main()
