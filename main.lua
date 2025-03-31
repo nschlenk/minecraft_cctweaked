@@ -95,6 +95,7 @@ function Main()
     if loc.y == 1 then
       turtle.up()
       loc.y = 2
+    end
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
       while loc.x < 5 do
         turtle.digDown()
