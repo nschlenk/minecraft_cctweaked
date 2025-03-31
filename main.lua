@@ -268,6 +268,7 @@ function Main()
     if result == "Hoe cycle complete" then
       print(result)
       PlantCycle()
+      HarvestCycle()
     end
   n = n - 1
   end
