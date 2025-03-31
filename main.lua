@@ -7,6 +7,7 @@
 local origin = {
   cd = 0, -- east (0), west (2), north (1), south (3)
   x = 1,
+  y = 1,
   z = 1,
 }
 
@@ -61,9 +62,7 @@ function WorkBlock()
   local result, table = turtle.inspectDown()
   print(table.name)
   if table.name == "minecraft:grass_block" or table.name == "minecraft:dirt" then
-    turtle.up()
     turtle.digDown()
-    turtle.down()
   end
 end
 
@@ -93,14 +92,18 @@ function Main()
   local hoe_in_hand = HoeHand() -- equips hoe and returns true if there is a diamond hoe in the inventory
   while hoe_in_hand do
     hoe_in_hand = HoeHand()
+    if loc.y == 1 then
+      turtle.up()
+      loc.y = 2
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
       while loc.x < 5 do
+        turtle.digDown()
         TurnTo(0)
         loc.cd = 0
         turtle.forward()
-        WorkBlock()
         loc.x = loc.x + 1
       end
+      turtle.digDown()
       if loc.z == 1 or loc.z == 3 then
         TurnTo(1)
         loc.cd = 1
@@ -110,12 +113,13 @@ function Main()
     end
     if loc.z == 2 or loc.z == 4 then
       while loc.x > 1 do
+        turtle.digDown()
         TurnTo(2)
         loc.cd = 2
         turtle.forward()
-        WorkBlock()
         loc.x = loc.x - 1
       end
+      turtle.digDown()
       TurnTo(1)
       loc.cd = 1
       turtle.forward()
