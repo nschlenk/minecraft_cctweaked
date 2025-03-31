@@ -194,12 +194,14 @@ function GoHome()
 end
 
 function Main()
-  while True do
+  n = 9
+  while n < 10 do
     result = HoeCycle()
     if result == "Hoe cycle complete" then
       print(result)
       PlantCycle()
     end
+  n = n - 1
   end
 end
 
