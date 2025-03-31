@@ -169,7 +169,8 @@ function PlantCycle()
     end
   GoHome()
   return "Seeds please!"
-    
+end
+      
 function GoHome()
   local move_z = loc.z
   local move_x = loc.x
