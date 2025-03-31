@@ -89,13 +89,19 @@ function HoeCycle()
     end
     if loc.z == 1 or loc.z == 3 or loc.z == 5 then
       while loc.x < 5 do
-        turtle.digDown()
+        a = turtle.inspectDown()
+        if a == nil then
+          turtle.digDown()
+        end        
         TurnTo(0)
         loc.cd = 0
         turtle.forward()
         loc.x = loc.x + 1
       end
-      turtle.digDown()
+      a = turtle.inspectDown()
+      if a == nil then
+        turtle.digDown()
+      end
       if loc.z == 1 or loc.z == 3 then
         TurnTo(1)
         loc.cd = 1
@@ -105,13 +111,19 @@ function HoeCycle()
     end
     if loc.z == 2 or loc.z == 4 then
       while loc.x > 1 do
-        turtle.digDown()
+        a = turtle.inspectDown()
+        if a == nil then
+          turtle.digDown()
+        end
         TurnTo(2)
         loc.cd = 2
         turtle.forward()
         loc.x = loc.x - 1
       end
-      turtle.digDown()
+      a = turtle.inspectDown()
+      if a == nil then
+        turtle.digDown()
+      end
       TurnTo(1)
       loc.cd = 1
       turtle.forward()
