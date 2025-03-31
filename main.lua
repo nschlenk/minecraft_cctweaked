@@ -185,7 +185,61 @@ function PlantCycle()
   GoHome()
   return "Seeds please!"
 end
-      
+
+function HarvestCycle()
+  if loc.y == 1 then
+    turtle.up()
+    loc.y = 2
+  end
+  if loc.z == 1 or loc.z == 3 or loc.z == 5 then
+    while loc.x < 5 do
+      local info = turtle.inspectDown()
+      if info ~= nil and info.state.age == 7 then
+        turtle.digDown("right")
+      end
+      TurnTo(0)
+      loc.cd = 0
+      turtle.forward()
+      loc.x = loc.x + 1
+    end
+    local info = turtle.inspectDown()
+    if info ~= nil and info.state.age == 7 then
+      turtle.digDown("right")
+    end
+    if loc.z == 1 or loc.z == 3 then
+      TurnTo(1)
+      loc.cd = 1
+      turtle.forward()
+      loc.z = loc.z + 1
+    end
+  end
+  if loc.z == 2 or loc.z == 4 then
+    while loc.x > 1 do
+      local info = turtle.inspectDown()
+      if info ~= nil and info.state.age == 7 then
+        turtle.digDown("right")
+      end
+      TurnTo(2)
+      loc.cd = 2
+      turtle.forward()
+      loc.x = loc.x - 1
+    end
+    local info = turtle.inspectDown()
+    if info ~= nil and info.state.age == 7 then
+      turtle.digDown("right")
+    end
+    TurnTo(1)
+    loc.cd = 1
+    turtle.forward()
+    loc.z = loc.z + 1
+  end
+  if loc.x == 5 and loc.z == 5 then
+    GoHome()
+    return "Harvest cycle complete"
+  end
+  GoHome()
+end
+
 function GoHome()
   local move_z = loc.z
   local move_x = loc.x
