@@ -194,8 +194,10 @@ function HarvestCycle()
   if loc.z == 1 or loc.z == 3 or loc.z == 5 then
     while loc.x < 5 do
       local info = turtle.inspectDown()
-      if info ~= nil and info.state.age == 7 then
-        turtle.digDown("right")
+      if info ~= nil then
+        if info.state.age == 7 then
+          turtle.digDown("right")
+        end
       end
       TurnTo(0)
       loc.cd = 0
@@ -203,8 +205,10 @@ function HarvestCycle()
       loc.x = loc.x + 1
     end
     local info = turtle.inspectDown()
-    if info ~= nil and info.state.age == 7 then
-      turtle.digDown("right")
+    if info ~= nil then
+      if info.state.age == 7 then
+        turtle.digDown("right")
+      end
     end
     if loc.z == 1 or loc.z == 3 then
       TurnTo(1)
@@ -216,8 +220,10 @@ function HarvestCycle()
   if loc.z == 2 or loc.z == 4 then
     while loc.x > 1 do
       local info = turtle.inspectDown()
-      if info ~= nil and info.state.age == 7 then
-        turtle.digDown("right")
+      if info ~= nil then
+        if info.state.age == 7 then
+          turtle.digDown("right")
+        end
       end
       TurnTo(2)
       loc.cd = 2
@@ -225,8 +231,10 @@ function HarvestCycle()
       loc.x = loc.x - 1
     end
     local info = turtle.inspectDown()
-    if info ~= nil and info.state.age == 7 then
-      turtle.digDown("right")
+    if info ~= nil then
+      if info.state.age == 7 then
+        turtle.digDown("right")
+      end
     end
     TurnTo(1)
     loc.cd = 1
