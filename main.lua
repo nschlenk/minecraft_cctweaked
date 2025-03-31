@@ -26,15 +26,15 @@ function HoeHand()
       turtle.equipLeft(x)
       return true
     end
+    if n == 0 then
+      turtle.equipLeft(x)
+    end
     if x == 16 then
       turtle.select(1)
     else
       turtle.select(x + 1)
     end
     n = n + 1
-    if n == 16 then
-      turtle.equipLeft(x)
-    end
   end
   return false
 end
