@@ -40,6 +40,26 @@ function HoeHand()
   return false
 end
 
+function SeedHand()
+  local n = 0
+  while n < 17 do
+    local info = turtle.getItemDetail()
+    x = turtle.getSelectedSlot()
+    if info ~= nil and info.name == "minecraft:wheat_seeds" then
+      turtle.select(x)
+      return true
+    end
+    if x == 16 then
+      turtle.select(1)
+    else
+      turtle.select(x + 1)
+    end
+    n = n + 1
+  end
+  return false
+end
+
+
 function GetHoe()
   print("Hoe please")
   --Turtle will go get a hoe
@@ -59,38 +79,8 @@ function TurnTo(direction) -- east (0), west (2), north (1), south (3)
   end
 end
 
-function WorkBlock()
-  local result, table = turtle.inspectDown()
-  print(table.name)
-  if table.name == "minecraft:grass_block" or table.name == "minecraft:dirt" then
-    turtle.digDown()
-  end
-end
-
-
-function GoHome()
-  local move_z = loc.z
-  local move_x = loc.x
-  while move_z > 1 do
-    TurnTo(3)
-    loc.cd = 3
-    turtle.forward()
-    move_z = move_z - 1
-  end
-  while move_x > 1 do
-    TurnTo(2)
-    loc.cd = 2
-    turtle.forward()
-    move_x = move_x - 1
-  end
-  TurnTo(2)
-  loc.cd = 2
-  loc.x = 1
-  loc.z = 1
-end
-
-function Main()
-  local hoe_in_hand = HoeHand() -- equips hoe and returns true if there is a diamond hoe in the inventory
+function HoeCycle()
+  hoe_in_hand = HoeHand()
   while hoe_in_hand do
     hoe_in_hand = HoeHand()
     if loc.y == 1 then
@@ -129,7 +119,85 @@ function Main()
     end
     if loc.x == 5 and loc.z == 5 then
       GoHome()
+      return "Hoe cycle complete"
     end
+  GoHome()
+  return "Hoe please!"
+
+function PlantCycle()
+  seed_in_hand = SeedHand()
+  while seed_in_hand do
+    seed_in_hand = SeedHand()
+    turtle.placeDown()
+    if loc.y == 1 then
+      turtle.up()
+      loc.y = 2
+    end
+    if loc.z == 1 or loc.z == 3 or loc.z == 5 then
+      while loc.x < 5 do
+        turtle.placeDown()
+        TurnTo(0)
+        loc.cd = 0
+        turtle.forward()
+        loc.x = loc.x + 1
+      end
+      turtle.placeDown()
+      if loc.z == 1 or loc.z == 3 then
+        TurnTo(1)
+        loc.cd = 1
+        turtle.forward()
+        loc.z = loc.z + 1
+      end
+    end
+    if loc.z == 2 or loc.z == 4 then
+      while loc.x > 1 do
+        turtle.placeDown()
+        TurnTo(2)
+        loc.cd = 2
+        turtle.forward()
+        loc.x = loc.x - 1
+      end
+      turtle.placeDown()
+      TurnTo(1)
+      loc.cd = 1
+      turtle.forward()
+      loc.z = loc.z + 1
+    end
+    if loc.x == 5 and loc.z == 5 then
+      GoHome()
+      return "Seed cycle complete"
+    end
+  GoHome()
+  return "Seeds please!"
+    
+function GoHome()
+  local move_z = loc.z
+  local move_x = loc.x
+  while move_z > 1 do
+    TurnTo(3)
+    loc.cd = 3
+    turtle.forward()
+    move_z = move_z - 1
+  end
+  while move_x > 1 do
+    TurnTo(2)
+    loc.cd = 2
+    turtle.forward()
+    move_x = move_x - 1
+  end
+  TurnTo(2)
+  loc.cd = 2
+  loc.x = 1
+  loc.z = 1
+end
+
+function Main()
+  while True do
+    result = HoeCycle()
+    if result == "Hoe cycle complete" then
+      print(result)
+      PlantCycle()
+        
   end
 end
 
