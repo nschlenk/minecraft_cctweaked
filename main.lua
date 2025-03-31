@@ -123,7 +123,8 @@ function HoeCycle()
     end
   GoHome()
   return "Hoe please!"
-
+end
+  
 function PlantCycle()
   seed_in_hand = SeedHand()
   while seed_in_hand do
@@ -198,7 +199,7 @@ function Main()
     if result == "Hoe cycle complete" then
       print(result)
       PlantCycle()
-        
+    end
   end
 end
 
