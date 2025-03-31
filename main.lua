@@ -121,6 +121,7 @@ function HoeCycle()
       GoHome()
       return "Hoe cycle complete"
     end
+  end
   GoHome()
   return "Hoe please!"
 end
@@ -168,6 +169,7 @@ function PlantCycle()
       GoHome()
       return "Seed cycle complete"
     end
+  end
   GoHome()
   return "Seeds please!"
 end
