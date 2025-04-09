@@ -4,6 +4,7 @@
 -- variables are global by default
 -- nil instead of null
 
+
 local origin = {
   cd = 0, -- east (0), west (2), north (1), south (3)
   x = 1,
