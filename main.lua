@@ -19,7 +19,12 @@ local loc = {
   z = 1,
 }
 
-function HoeHand()
+local farm_dimensions = {
+  x = 5,
+  z = 5,
+}
+
+function HoldHoe()
   local n = 0
   while n < 17 do
     local info = turtle.getItemDetail()
@@ -28,20 +33,16 @@ function HoeHand()
       turtle.equipLeft(x)
       return true
     end
-    if n == 0 then
-      turtle.equipLeft(x)
-    end
-    if x == 16 then
-      turtle.select(1)
-    else
-      turtle.select(x + 1)
+    if n == 0 then turtle.equipLeft(x)
+    elseif x == 16 then turtle.select(1)
+    else turtle.select(x + 1)
     end
     n = n + 1
   end
   return false
 end
 
-function SeedHand()
+function PrepSeeds()
   local n = 0
   while n < 17 do
     local info = turtle.getItemDetail()
@@ -79,6 +80,10 @@ function TurnTo(direction) -- east (0), west (2), north (1), south (3)
     n = n + 1
   end
 end
+
+
+
+
 
 function HoeCycle()
   hoe_in_hand = HoeHand()
@@ -270,16 +275,51 @@ function GoHome()
   loc.z = 1
 end
 
-function Main()
-  n = 9
-  while n < 10 do
-    result = HoeCycle()
-    if result == "Hoe cycle complete" then
-      print(result)
-      PlantCycle()
-      HarvestCycle()
+function Act()
+  local success, a = turtle.inspectDown()
+  if success then
+    if a == nil then -- hoe and plant
+      turtle.digDown("left")
+      turtle.placeDown()
+    elseif a.state.age == 7 then -- harvest
+      turtle.digDown("right")
+      turtle.placeDown()
     end
-  n = n - 1
+  end
+end
+
+
+
+function Main()
+  holding_the_hoe = HoldHoe()
+  if holding_the_hoe == true then
+    while loc.z < farm_dimensions.z + 1 and loc.x < farm_dimensions.x + 1 do
+      Act()
+      col_type = loc.z % 2
+      if col_type == 1 and loc.x < farm_dimensions.x then
+        turtle.forward()
+        loc.x = loc.x + 1
+      elseif col_type == 1 and loc.x == farm_dimensions.x then
+        TurnTo(1)
+        loc.cd = 1
+        turtle.forward()
+        loc.z = loc.z + 1
+        TurnTo(2)
+        loc.cd = 2
+      elseif col_type == 0 and loc.x > 0 then
+        turtle.forward()
+        loc.x = loc.x - 1
+      elseif col_type == 0 and loc.x == 0 then
+        TurnTo(1)
+        loc.cd = 1
+        turtle.forward()
+        loc.z = loc.z + 1
+        TurnTo(0)
+        loc.cd = 0
+      elseif loc.x == farm_dimensions.x and loc.z == farm_dimensions.z then
+        GoHome()
+      end
+    end
   end
 end
 
